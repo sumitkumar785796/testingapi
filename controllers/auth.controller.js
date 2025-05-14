@@ -151,10 +151,17 @@ exports.AccessProfile = async (req, res) => {
         if (!user) {
             return res.status(401).json({ message: "Unauthorized access" });
         }
+        // Fetch fresh user data from database
+        const freshUserData = await db.select()
+            .from(users)
+            .where(eq(users.id, user.userId));
 
+        if (freshUserData.length === 0) {
+            return res.status(404).json({ message: "User not found" });
+        }
         return res.status(200).json({
             message: "Your Profile",
-            data: user,
+            data: freshUserData[0],
         });
     } catch (error) {
         return res.status(500).json({
