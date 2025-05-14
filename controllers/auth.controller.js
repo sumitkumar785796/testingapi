@@ -151,11 +151,10 @@ exports.AccessProfile = async (req, res) => {
         if (!user) {
             return res.status(401).json({ message: "Unauthorized access" });
         }
-        // Query the database for the most up-to-date user data
-        const freshUser = await db.select().from('users').where({ id: user.userId }).first();
+
         return res.status(200).json({
             message: "Your Profile",
-            data: freshUser,
+            data: user,
         });
     } catch (error) {
         return res.status(500).json({
