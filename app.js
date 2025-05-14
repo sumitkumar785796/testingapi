@@ -8,7 +8,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser());
 app.use(cors({
-    origin: 'https://testingfrontsumit.vercel.app/',
+    origin: 'https://testingfrontsumit.vercel.app',
     credentials: true
 }));  
 app.use("/api/users", userroutes)
